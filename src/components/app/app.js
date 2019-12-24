@@ -20,6 +20,20 @@ export default class App extends Component {
         });
     };
 
+    componentDidMount() {
+        console.log('component did mount');
+    }
+
+    componentDidUpdate(prevProps, prevState, snapshot) {
+    }
+
+    componentWillUnmount() {
+        console.log('component will unmount');
+    }
+
+    componentDidCatch(error, errorInfo) {
+    }
+
     render() {
 
         const planet = this.state.showRandomPlanet ? <RandomPlanet /> : null;
