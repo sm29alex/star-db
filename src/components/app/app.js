@@ -9,7 +9,8 @@ import './app.css';
 
 export default class App extends Component {
     state = {
-        showRandomPlanet: true
+        showRandomPlanet: true,
+        selectedPerson: 5
     }
 
     toggleRandomPlanet = () => {
@@ -20,18 +21,12 @@ export default class App extends Component {
         });
     };
 
-    componentDidMount() {
-        console.log('component did mount');
-    }
-
-    componentDidUpdate(prevProps, prevState, snapshot) {
-    }
-
-    componentWillUnmount() {
-        console.log('component will unmount');
-    }
-
-    componentDidCatch(error, errorInfo) {
+    onPersonSelected = (id) => {
+        this.setState( (state) => {
+            return {
+                selectedPerson: id
+            }
+        })
     }
 
     render() {
@@ -53,10 +48,10 @@ export default class App extends Component {
 
                 <div className="row mb2">
                     <div className="col-md-6">
-                        <ItemList/>
+                        <ItemList onItemSelected = {this.onPersonSelected} />
                     </div>
                     <div className="col-md-6">
-                        <PersonDetails/>
+                        <PersonDetails personId= {this.state.selectedPerson} />
                     </div>
                 </div>
             </div>
