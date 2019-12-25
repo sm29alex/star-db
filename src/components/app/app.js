@@ -6,8 +6,12 @@ import PersonDetails from "../person-details";
 import RandomPlanet from "../random-planet";
 
 import './app.css';
+import SwapiService from "../../services/swapi-service";
 
 export default class App extends Component {
+
+    swapiService = new SwapiService();
+
     state = {
         showRandomPlanet: true,
         selectedPerson: 5
@@ -48,7 +52,10 @@ export default class App extends Component {
 
                 <div className="row mb2">
                     <div className="col-md-6">
-                        <ItemList onItemSelected = {this.onPersonSelected} />
+                        <ItemList 
+                            onItemSelected = {this.onPersonSelected} 
+                            getData={this.swapiService.getAllPeople}
+                            renderItem = { ({name, gender, birthYear}) => `${name} (${gender}, ${birthYear})` }/>
                     </div>
                     <div className="col-md-6">
                         <PersonDetails personId= {this.state.selectedPerson} />
