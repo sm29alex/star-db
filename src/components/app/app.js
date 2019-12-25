@@ -7,61 +7,43 @@ import RandomPlanet from "../random-planet";
 
 import './app.css';
 import SwapiService from "../../services/swapi-service";
+import ErrorBoundry from "../error-boundry";
+import PeoplePage from "../people-page";
 
 export default class App extends Component {
 
-    swapiService = new SwapiService();
-
     state = {
-        showRandomPlanet: true,
-        selectedPerson: 5
+        showRandomPlanet: true
     }
 
     toggleRandomPlanet = () => {
-        this.setState( (state) => {
+        this.setState((state) => {
             return {
                 showRandomPlanet: !state.showRandomPlanet
             }
         });
     };
 
-    onPersonSelected = (id) => {
-        this.setState( (state) => {
-            return {
-                selectedPerson: id
-            }
-        })
-    }
-
     render() {
 
-        const planet = this.state.showRandomPlanet ? <RandomPlanet /> : null;
+        const planet = this.state.showRandomPlanet ? <RandomPlanet/> : null;
 
         return (
+            <ErrorBoundry>
 
-            <div>
-                <Header/>
+                <div>
+                    <Header/>
 
-                { planet }
+                    {planet}
 
-                <button
-                    className="toggle-planet btn btn-warning btn-lg"
-                    onClick={this.toggleRandomPlanet}>
-                    Toggle Random Planet
-                </button>
-
-                <div className="row mb2">
-                    <div className="col-md-6">
-                        <ItemList 
-                            onItemSelected = {this.onPersonSelected} 
-                            getData={this.swapiService.getAllPeople}
-                            renderItem = { ({name, gender, birthYear}) => `${name} (${gender}, ${birthYear})` }/>
-                    </div>
-                    <div className="col-md-6">
-                        <PersonDetails personId= {this.state.selectedPerson} />
-                    </div>
+                    <button
+                        className="toggle-planet btn btn-warning btn-lg"
+                        onClick={this.toggleRandomPlanet}>
+                        Toggle Random Planet
+                    </button>
+                    <PeoplePage />
                 </div>
-            </div>
+            </ErrorBoundry>
         )
     }
 }
