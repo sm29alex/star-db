@@ -18,8 +18,8 @@ const PersonDetails = ( {itemId} ) => {
     return (
         <ItemDetails 
                     itemId={itemId}
-                    getImageUrl={getImageUrl}
-                    getData={getData}>
+                    getImageUrl={getPersonImage}
+                    getData={getPerson}>
                     <Record field="gender" label="Gender" />
                     <Record field="birthYear" label="Birth year"/>
                     <Record field="eyeColor" label="Eye color"/>

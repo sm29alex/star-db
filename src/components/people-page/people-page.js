@@ -29,7 +29,7 @@ export default class PeoplePage extends Component{
     render() {
 
         const itemList = (
-            <PersonList>
+            <PersonList onItemSelected={this.onPersonSelected}>
                     {(i) => `${i.name}, ${i.birthYear}`}
             </PersonList>
         );
@@ -38,7 +38,7 @@ export default class PeoplePage extends Component{
         const getData = this.swapiService.getPerson;
         const personDetails = (
             <ErrorBoundry>
-                <PersonDetails itemId = {selectedPerson} />
+                <PersonDetails itemId = {this.state.selectedPerson} />
             </ErrorBoundry>
         );
         
