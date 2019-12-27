@@ -3,6 +3,22 @@ import React, {Component} from "react";
 import './item-details.css';
 import ErrorButton from "../error-button";
 
+
+
+const Record = (props) => {
+    const { label, field, item } = props;
+
+    return (
+        <li className="list-group-item">
+            <span className="term">{label}</span>
+            <span>{ item[field]}</span>
+        </li>
+    )
+}
+
+export { Record };
+
+
 export default class ItemDetails extends Component {
 
     state = {
@@ -65,16 +81,3 @@ export default class ItemDetails extends Component {
     }
 
 }
-
-const Record = (props) => {
-    const { label, field, item } = props;
-
-    return (
-        <li className="list-group-item">
-            <span className="term">{label}</span>
-            <span>{ item[field]}</span>
-        </li>
-    )
-}
-
-export { Record };
