@@ -3,6 +3,7 @@ import React, {Component} from "react";
 import './person-details.css';
 import SwapiService from "../../services/swapi-service";
 import ErrorButton from "../error-button";
+import ItemDetails, { Record } from "../item-details/item-details";
 
 export default class PersonDetails extends Component {
 
@@ -45,30 +46,20 @@ export default class PersonDetails extends Component {
         }
 
         const {id, name, gender, bithYear, eyeColor } = this.state.person;
+        const getData = this.swapiService.getPerson;
+        const getImageUrl = this.swapiService.getPersonImage;
 
         return (
             <div className="person-details card">
                 <img className="person-image"
                      src={`https://starwars-visualguide.com/assets/img/characters/${id}.jpg`} alt="No!!!"/>
 
-                <div className="card-body">
-                    <h4>{name}</h4>
-                    <ul className="list-group list-group-flush">
-                        <li className="list-group-item">
-                            <span className="term">Gender</span>
-                            <span>{gender}</span>
-                        </li>
-                        <li className="list-group-item">
-                            <span className="term">Birth Year</span>
-                            <span>{bithYear}</span>
-                        </li>
-                        <li className="list-group-item">
-                            <span className="term">Eye Color</span>
-                            <span>{eyeColor}</span>
-                        </li>
-                    </ul>
-                    <ErrorButton />
-                </div>
+                <ItemDetails
+                    itemId={id}
+                    getData={getData}
+                    getImageUrl={getImageUrl}>
+                        <Record field="gender" column="gender" />
+                </ItemDetails>
             </div>
         )
     }
