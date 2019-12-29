@@ -24,8 +24,6 @@ export default class PeoplePage extends Component{
         })
     }
 
-
-
     render() {
 
         const itemList = (
