@@ -1,5 +1,5 @@
 import React, {Component} from "react";
-import { BrowserRouter as Router, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
 import Header from "../header";
 import RandomPlanet from "../random-planet";
@@ -51,6 +51,7 @@ export default class App extends Component {
                             <Header onServiceChange={this.onServiceChange} />
 
                             {planet}
+                            <Switch>
                             <Route path="/" 
                                 render={() => <h2>Welcome to StarDB</h2>} 
                                 exact />
@@ -70,6 +71,8 @@ export default class App extends Component {
                             <Route 
                                 path="/secret" 
                                 render={ () => <SecretPage isLoggedIn={isLoggedIn}/> } />
+                            <Route render={ () => <p>Page not found</p>} />
+                            </Switch>
                         </div>
                     </Router>
                 </SwapiServiceProvider>
